@@ -70,6 +70,7 @@ function agregarMensaje(texto, tipo, imagen = null) {
     img.src = imagen;
     img.alt = "Recuerdo especial";
     img.style.maxWidth = "100%";
+    mensaje.appendChild(img);
   }
 
   chatBox.appendChild(mensaje);
