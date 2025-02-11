@@ -1,0 +1,35 @@
+body {
+    font-family: "DM Serif Text", sans-serif;
+    text-align: center;
+    background-color: #ffe6e6;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #f4163f;
+}
+
+.proyectos {
+    list-style: none;
+    padding: 0;
+}
+
+.proyectos li {
+    margin: 50px 0px;
+}
+
+.proyectos a {
+    position: relative;
+    text-decoration: none;
+    font-size: 20px;
+    background: #ff4d6d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.proyectos a:hover {
+    background: #f4163f;
+}
