@@ -46,7 +46,13 @@ body {
     top: 12px;
     left: 12px; 
     right: 12px; 
-    bottom: 45px; 
+    bottom: 55px; 
+}
+
+.mensaje p{
+    position: relative;
+    top: -10px;
+    font-size: 1.2rem;
 }
 
 .carta {
