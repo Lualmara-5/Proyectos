@@ -1,0 +1,147 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #fae1dd;
+    font-family: DM Serif Text, sans-serif;
+    margin: 0;
+}
+
+.contenedor {
+    position: relative;
+}
+
+.superior {
+    position: absolute;
+    border-left: 180px solid transparent;
+    border-right: 180px solid transparent;
+    border-top: 120px solid #f08080;
+    border-bottom: 120px solid transparent;
+
+    transition: transform .75s;
+    transform-origin: top;
+}
+
+.mensaje {
+    position: absolute;
+    padding: 1.5rem;
+    line-height: 1.5rem;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 22px;
+    background: #eae2b7;
+    width: 360px;
+    height: 240px;
+    z-index: -1;
+    transition: transform 0.75s ease-in-out;
+}
+
+.mensaje:before {
+    content: "";
+    border-style: dotted;
+    position: absolute;
+    top: 12px;
+    left: 12px; 
+    right: 12px; 
+    bottom: 55px; 
+}
+
+.mensaje p{
+    position: relative;
+    top: -10px;
+    font-size: 1.2rem;
+}
+
+.carta {
+    border-left: 180px solid #f8ad9d;
+    border-right: 180px solid #f4978e;
+    border-top: 120px solid transparent;
+    border-bottom: 120px solid #f8ad9d;
+}
+
+.bx {
+    position: absolute;
+    color: #f6406a;
+    top: 90px;
+    right: 155px;
+    font-size: 50px;
+    animation: palpitar 0.6s linear infinite;
+}
+
+.psorpresa {
+    margin-top: -10px;
+}
+
+.botones {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.boton {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #ff66b2, #ff4081);
+    background-size: 200% 200%;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.boton:hover {
+    background-position: 100% 100%;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.abrir-superior {
+    transform: rotateX(180deg);
+}
+
+.abrir-mensaje {
+    transform: translateY(-100px);
+}
+
+.bx-rotada {
+    color: #f6406a;
+    animation: none; 
+}
+
+  
+@keyframes palpitar {
+    0% {
+      transform: scale(1.07); /* Tamaño original */
+    }
+    80% {
+      transform: scale(1.0); /* Aumentar el tamaño un poco */
+    }
+    100% {
+      transform: scale(1.08); /* Regresar al tamaño original */
+    }
+}
+
+@media (max-width: 768px) {
+
+    .mensaje:before {
+        content: "";
+        border-style: dotted;
+        position: absolute;
+        top: 12px;
+        left: 12px; 
+        right: 12px; 
+        bottom: 45px; 
+    }
+    
+    .mensaje p{
+        position: relative;
+        top: -15px;
+        font-size: 1rem;
+    }
+}

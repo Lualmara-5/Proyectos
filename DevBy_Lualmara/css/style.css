@@ -1,0 +1,133 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "DM Serif Text", serif;
+  background: #303237;
+  color: #fff;
+}
+
+h4 {
+  font-size: 1.4rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+p {
+  font-size: 0.73rem;
+  line-height: 1.3em;
+}
+
+.container {
+  margin: auto;
+  max-width: 1550px;
+  overflow: auto;
+  padding: 0 20px;
+}
+
+#grid {
+  padding: 20px 0;
+}
+
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.box {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+  background: #2a2b2f;
+  padding: 20px 15px 40px;
+  border: 2px solid #474f58;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+  overflow: hidden; 
+}
+
+.box:hover {
+  transform: translateY(-5px);
+}
+
+.box img {
+  width: 100%;
+  height: 200px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+/* Tags */
+.tech-tags {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.tech-tags {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+}
+
+.tag {
+  padding: 3px 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 10px;
+  color: #383838;
+  user-select: none;
+}
+
+.tag.html {
+  background-color: #fdd9a0;
+}
+
+.tag.css {
+  background-color: #a0d7fd;
+}
+
+.tag.js {
+  background-color: #fff1a0;
+}
+
+.tag.San-Valentín {
+  background-color: #ffa0e2;
+}
+
+/*Iconos*/
+.heart1 {
+	position: absolute;
+	font-size: 13px;
+	color: red;
+	right: -3px;
+	top: 13px;
+	animation: latido 1.5s infinite;
+}
+
+.heart2 {
+	position: absolute;
+	font-size: 13px;
+	color: red;
+	right: 71px;
+	bottom: 11px;
+	animation: latido 1.5s infinite;
+}
+
+@keyframes latido {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}

@@ -1,0 +1,41 @@
+/* Tablet (hasta 992px) */
+@media screen and (max-width: 992px) {
+  .grid-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .box img {
+    height: 180px;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+  }
+
+  p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Móvil (hasta 600px) */
+@media screen and (max-width: 600px) {
+  .grid-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .box {
+    padding: 15px 10px;
+  }
+
+  .box img {
+    height: 160px;
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 0.8rem;
+  }
+}
