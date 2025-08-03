@@ -1,4 +1,4 @@
-# Galería de Proyectos 🚀💻
+# Galería de Proyectos 🚀
 
 ## 🎬 Vista Previa
 
@@ -21,13 +21,13 @@ Cada tarjeta representa un mini proyecto creativo hecho con **HTML, CSS y JavaSc
 ```plaintext
 DevBy_Lualmara/
 ├── css/
-│   ├── style.css
-│   └── mobile.css
+│   ├── mobile.css
+│   └── style.css
 ├── imagenes/
 │   └── (imagenes usadas en los proyectos y portadas)
-├── Proyectos/
-│   ├── Carta_San_Valentin/
-│   │   └── index.html, css, js...
+├── proyectos/
+│   ├── Carta De Amor/
+│   │   └── index.html, script.js, styles.css...
 │   └── (otros proyectos futuros)
 └── index.html (Tablero principal)
 ```
