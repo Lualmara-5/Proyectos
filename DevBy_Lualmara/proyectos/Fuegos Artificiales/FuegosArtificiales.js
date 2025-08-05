@@ -78,7 +78,7 @@ function lanzarFuegoAuto() {
   fuego.color = obtenerColor();
 
   fuego.tx = aleatorio(100, ancho - 100);
-  fuego.ty = aleatorio(0, alto / 2);
+  fuego.ty = aleatorio(0, alto * 2);
 
   const angulo = obtenerAngulo(fuego.sx, fuego.sy, fuego.tx, fuego.ty);
   fuego.vx = Math.cos((angulo * Math.PI) / 180.0);
@@ -136,7 +136,7 @@ function FuegoAuto() {
 }
 
 //
-// 3.1 Función y Clase para tirar el fuego artificial y que explote justo donde damos click (OPCIONAL)
+// 3.2 Función y Clase para tirar el fuego artificial y que explote justo donde damos click (OPCIONAL)
 //
 
 function lanzarFuegoClick(x, y) {
@@ -295,3 +295,4 @@ function animar() {
 }
 
 animar();
+
