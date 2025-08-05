@@ -77,8 +77,14 @@ function lanzarFuegoAuto() {
   fuego.y = fuego.sy = alto;
   fuego.color = obtenerColor();
   
-  fuego.tx = aleatorio(100, ancho - 100);
-  fuego.ty = aleatorio(0, alto * 0.9);
+  // Movil y PC
+  if (ancho <= 768) {
+    fuego.tx = aleatorio(100, ancho - 100);
+    fuego.ty = aleatorio(0, alto * 0.1);
+  } else {
+    fuego.tx = aleatorio(100, ancho - 100);
+    fuego.ty = aleatorio(0, alto / 2); 
+  }
 
   const angulo = obtenerAngulo(fuego.sx, fuego.sy, fuego.tx, fuego.ty);
   fuego.vx = Math.cos((angulo * Math.PI) / 180.0);
@@ -298,6 +304,7 @@ function animar() {
 }
 
 animar();
+
 
 
 
