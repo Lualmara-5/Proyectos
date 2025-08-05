@@ -107,7 +107,7 @@ function FuegoAuto() {
   this.velocidad = aleatorio(700, 1200); // Velocidad Inicial del disparo
   
   // Gravedad adaptada a móvil o PC
-  this.gravedad = (ancho <= 768) ? 0.8 : 1.5; 
+  this.gravedad = (ancho <= 768) ? 0.3 : 1.5; 
   
   this.ms = 0; // Guardamos el tiempo por fotograma
   this.contador = 0; // Cronómetro para saber cuándo explota
@@ -118,7 +118,7 @@ function FuegoAuto() {
     this.ms = ms / 1000;
 
     // Tiempo de vida mayor en móvil
-    let tiempoExplosion = (ancho <= 768) ? 3500 / ms : 2000 / ms;
+    let tiempoExplosion = (ancho <= 768) ? 5500 / ms : 2000 / ms;
 
     if (this.contador > tiempoExplosion) {
       crearParticulas(1, 30, this.x, this.y, this.color);
@@ -302,6 +302,7 @@ function animar() {
 }
 
 animar();
+
 
 
 
