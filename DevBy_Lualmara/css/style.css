@@ -100,11 +100,20 @@ p {
   background-color: #fff1a0;
 }
 
+.tag.Canva {
+  background-color: #CBAACB;
+}
+
 .tag.San-Valentín {
-  background-color: #ffa0e2;
+  background: linear-gradient(45deg, #ffb6c1 ,#ff899b, #fa3b58);
+}
+
+.tag.Visual-Effects {
+  background: linear-gradient(45deg, #00f7ff, #c0b0f6);
 }
 
 /*Iconos*/
+
 .heart1 {
 	position: absolute;
 	font-size: 13px;
@@ -123,11 +132,42 @@ p {
 	animation: latido 1.5s infinite;
 }
 
+.star1 {
+	position: absolute;
+	font-size: 13px;
+	color: yellow;
+	right: -3px;
+	top: 12px;
+  animation: brillo 1.5s infinite;
+}
+
+.star2 {
+	position: absolute;
+	font-size: 13px;
+	color: yellow;
+	right: 76px;
+	bottom: 13px;
+  animation: brillo 1.5s infinite;
+}
+
+/*Animaciones*/
+
 @keyframes latido {
   0%, 100% {
     transform: scale(1);
   }
   50% {
     transform: scale(1.2);
+  }
+}
+
+@keyframes brillo {
+  0%, 100% {
+    text-shadow: 0 0 3px #fff, 0 0 6px yellow, 0 0 9px yellow;
+    transform: scale(1);
+  }
+  50% {
+    text-shadow: 0 0 6px #fff, 0 0 12px yellow, 0 0 18px yellow;
+    transform: scale(1);
   }
 }
