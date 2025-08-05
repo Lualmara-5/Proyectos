@@ -77,8 +77,17 @@ function lanzarFuegoAuto() {
   fuego.y = fuego.sy = alto;
   fuego.color = obtenerColor();
 
+   // 3.1 Ajustar altura máxima de explosión según tamaño de pantalla
+  let limiteAltura;
+  if (ancho <= 768) { 
+    // Móvil
+    limiteAltura = alto * 0.9; 
+  } else {
+    // PC
+    limiteAltura = alto / 2;
+  }
   fuego.tx = aleatorio(100, ancho - 100);
-  fuego.ty = aleatorio(0, alto * 2);
+  fuego.ty = aleatorio(0, limiteAltura);
 
   const angulo = obtenerAngulo(fuego.sx, fuego.sy, fuego.tx, fuego.ty);
   fuego.vx = Math.cos((angulo * Math.PI) / 180.0);
@@ -295,4 +304,5 @@ function animar() {
 }
 
 animar();
+
 
