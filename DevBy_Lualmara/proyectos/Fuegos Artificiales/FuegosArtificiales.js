@@ -116,11 +116,7 @@ function FuegoAuto() {
   // Cerebro [Mover, Decidir si explota]
   this.actualizar = function (ms) {
     this.ms = ms / 1000;
-
-    // Tiempo de vida mayor en móvil
-    let tiempoExplosion = (ancho <= 768) ? 5500 / ms : 2000 / ms;
-
-    if (this.contador > tiempoExplosion) {
+    if (this.contador > 2000 / ms) {
       crearParticulas(1, 30, this.x, this.y, this.color);
       this.eliminar = true;
     } else {
@@ -302,6 +298,7 @@ function animar() {
 }
 
 animar();
+
 
 
 
