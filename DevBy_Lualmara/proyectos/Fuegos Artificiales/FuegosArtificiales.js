@@ -17,11 +17,17 @@ const ctx = canvas.getContext("2d");
 const tasaFPS = 60.0; //60 frames por segundo
 const retardoFotograma = 1000.0 / tasaFPS; // Tiempo entre cada uno 1000ms/60 = 16.6ms
 
-// Ajustamos el tamaño del canvas (Ocupa todo el tamaño de la pantalla del navegador)
-const ancho = innerWidth;
-const alto = innerHeight;
-canvas.width = ancho;
-canvas.height = alto;
+let ancho, alto;
+function ajustarCanvas() {
+  ancho = window.innerWidth;
+  alto = window.innerHeight;
+  canvas.width = ancho;
+  canvas.height = alto;
+}
+// Llamar al inicio y al cambiar tamaño
+window.addEventListener("resize", ajustarCanvas);
+ajustarCanvas();
+
 
 // Variables que usaremos para controlar los fuegos artificiales
 let temporizador = 0;
@@ -295,4 +301,5 @@ function animar() {
 }
 
 animar();
+
 
