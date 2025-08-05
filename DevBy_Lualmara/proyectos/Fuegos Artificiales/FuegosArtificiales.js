@@ -78,7 +78,7 @@ function lanzarFuegoAuto() {
   fuego.color = obtenerColor();
 
   fuego.tx = aleatorio(100, ancho - 100);
-  fuego.ty = aleatorio(0, alto / 2);
+  fuego.ty = aleatorio(alto * 0.3, alto * 0.7); // Explotan entre el 30% y 70% de la altura
 
   const angulo = obtenerAngulo(fuego.sx, fuego.sy, fuego.tx, fuego.ty);
   fuego.vx = Math.cos((angulo * Math.PI) / 180.0);
@@ -295,3 +295,4 @@ function animar() {
 }
 
 animar();
+
