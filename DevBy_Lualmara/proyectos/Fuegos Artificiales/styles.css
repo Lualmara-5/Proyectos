@@ -1,11 +1,16 @@
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  overflow: hidden; /* Evita scroll */
+  height: 100%; /* Asegura que ocupe todo el alto */
   background: #fb7070;
 }
 
 canvas {
-  position: absolute;
-  background: wheat;
   display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 100;
+  background: wheat; 
 }
