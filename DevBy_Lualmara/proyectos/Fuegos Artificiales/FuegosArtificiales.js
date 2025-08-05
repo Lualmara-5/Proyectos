@@ -76,15 +76,9 @@ function lanzarFuegoAuto() {
   fuego.x = fuego.sx = aleatorio(100, ancho - 100);
   fuego.y = fuego.sy = alto;
   fuego.color = obtenerColor();
-  
-  // Movil y PC
-  if (ancho <= 768) {
-    fuego.tx = aleatorio(100, ancho - 100);
-    fuego.ty = aleatorio(0, alto * 0.1);
-  } else {
-    fuego.tx = aleatorio(100, ancho - 100);
-    fuego.ty = aleatorio(0, alto / 2); 
-  }
+
+  fuego.tx = aleatorio(100, ancho - 100);
+  fuego.ty = aleatorio(0, alto / 2);
 
   const angulo = obtenerAngulo(fuego.sx, fuego.sy, fuego.tx, fuego.ty);
   fuego.vx = Math.cos((angulo * Math.PI) / 180.0);
@@ -111,13 +105,10 @@ function FuegoAuto() {
   this.vy = 0; // Dirección hacia donde va
   this.color = "#fff";
   this.velocidad = aleatorio(700, 1200); // Velocidad Inicial del disparo
-  
-  // Gravedad adaptada a móvil o PC
-  this.gravedad = (ancho <= 768) ? 0.3 : 1.5; 
-  
-  this.ms = 0; // Guardamos el tiempo por fotograma
+  this.gravedad = 1.5; // Fuerza Gravitacional (Cae el fuego artificial)
+  this.ms = 0; // Guardamos el tiempo por fotograma(milisegundos)
   this.contador = 0; // Cronómetro para saber cuándo explota
-  this.eliminar = false; // Saber cuándo eliminamos el fuego artificial
+  this.eliminar = false; // Saber cuándo eliminamos el fuego artificial (osea si ya explotó)
 
   // Cerebro [Mover, Decidir si explota]
   this.actualizar = function (ms) {
@@ -132,7 +123,7 @@ function FuegoAuto() {
     }
     this.contador++;
   };
-  
+
   // Cuerpo [Mostrarlo en pantalla]
   this.dibujar = function () {
     ctx.beginPath();
@@ -304,10 +295,3 @@ function animar() {
 }
 
 animar();
-
-
-
-
-
-
-
