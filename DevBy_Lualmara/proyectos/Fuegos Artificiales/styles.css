@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  background: #fb7070;
+}
+
+canvas {
+  position: absolute;
+  background: wheat;
+  display: block;
+  z-index: 100;
+}
