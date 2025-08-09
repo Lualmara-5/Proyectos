@@ -20,7 +20,7 @@ let temporizador = 0;
 let fuegos = [];
 let particulas = [];
 let siguienteDisparo = 0;
-let intervaloFuego = 60000; //Recomendado (600)
+let intervaloFuego = 600; 
 
 // Paleta De Colores
 const paletaColores = [
@@ -280,3 +280,4 @@ function animar() {
 }
 
 animar();
+
