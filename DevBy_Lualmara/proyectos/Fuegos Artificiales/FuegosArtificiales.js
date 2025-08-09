@@ -3,93 +3,58 @@
 //
 // 1. Configuración Inicial
 //
-
-// Desactivamos menú (Guardar imagen "click derecho")
 window.oncontextmenu = function () {
   return false;
 };
 
-// Obtenemos el canvas y su contexto
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-// Configuramos dimensiones y fotogramas
-const tasaFPS = 60.0; //60 frames por segundo
-const retardoFotograma = 1000.0 / tasaFPS; // Tiempo entre cada uno 1000ms/60 = 16.6ms
+let ancho = (canvas.width = window.innerWidth);
+let alto = (canvas.height = window.innerHeight);
 
-let ancho, alto;
-function ajustarCanvas() {
-  ancho = window.innerWidth;
-  alto = window.innerHeight;
-  canvas.width = ancho;
-  canvas.height = alto;
-}
-// Llamar al inicio y al cambiar tamaño
-window.addEventListener("resize", ajustarCanvas);
-ajustarCanvas();
+const minParticulas = 700;
+const maxParticulas = 1000;
 
-
-// Variables que usaremos para controlar los fuegos artificiales
 let temporizador = 0;
-
 let fuegos = [];
 let particulas = [];
 let siguienteDisparo = 0;
-let intervaloFuego = 600;
+let intervaloFuego = 60000; //Recomendado (600)
+
+// Paleta De Colores
+const paletaColores = [
+  ["rgba(179,255,129,", "rgba(0,255,0,"], // verde - blanco
+  ["rgba(0,0,255,", "rgba(100,217,255,"], // azul - cian
+  ["rgba(255,0,0,", "rgba(255,255,0,"], // rojo - amarillo
+  ["rgba(145,0,213,", "rgba(251,144,204,"], // morado - rosa
+  ["rgba(255,128,0,", "rgba(255,255,153,"], // naranja - amarillo pálido
+  ["rgba(255,0,127,", "rgba(255,182,193,"], // fucsia - rosa claro
+  ["rgba(173,216,230,", "rgba(0,191,255,"], // celeste - azul intenso
+  ["rgba(255,215,0,", "rgba(255,255,255,"], // dorado - blanco
+  ["rgba(64,224,208,", "rgba(0,255,255,"], // turquesa - cian brillante
+  ["rgba(255,69,0,", "rgba(255,165,0,"], // rojo anaranjado - naranja
+];
 
 //
 // 2. Funciones Auxiliares
 //
-
-// Calcular distancia entre 2 puntos (Teorema de Pitágoras)
 function obtenerDistancia(x1, y1, x2, y2) {
   const dx = x1 - x2;
   const dy = y1 - y2;
   return Math.sqrt(dx * dx + dy * dy);
 }
 
-// Calcular ángulo entre 2 puntos
-function obtenerAngulo(x1, y1, x2, y2) {
-  return Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI) + 180;
-}
-
-// Generar # aleatorio
 function aleatorio(min, max, redondear) {
   const valor = Math.random() * (max - min) + min;
   return redondear ? Math.round(valor) : valor;
 }
 
-// Elegir color aleatorio
-function obtenerColor() {
-  const colores = [
-    "#ff0000",
-    "#ffff00",
-    "#00ff00",
-    "#00ffff",
-    "#0000ff",
-    "#ff00ff",
-    "#ffac00",
-  ];
-  return colores[aleatorio(0, colores.length, true)];
-}
-
 //
-// 3. Lanzar el Fuego Artificial
+// 3. Lanzar Fuego Automático
 //
-
 function lanzarFuegoAuto() {
   const fuego = new FuegoAuto();
-  fuego.x = fuego.sx = aleatorio(100, ancho - 100);
-  fuego.y = fuego.sy = alto;
-  fuego.color = obtenerColor();
-
-  fuego.tx = aleatorio(100, ancho - 100);
-  fuego.ty = aleatorio(alto * 0.3, alto * 0.7); // Explotan entre el 30% y 70% de la altura
-
-  const angulo = obtenerAngulo(fuego.sx, fuego.sy, fuego.tx, fuego.ty);
-  fuego.vx = Math.cos((angulo * Math.PI) / 180.0);
-  fuego.vy = Math.sin((angulo * Math.PI) / 180.0);
-
   fuegos.push(fuego);
 
   // Reproducir sonido
@@ -97,54 +62,62 @@ function lanzarFuegoAuto() {
   //sonido.play();
 }
 
-// Aqui creamos el fuego artificial
-// Con esto que vamos a crear a continuación creamos una "bala inteligente" ya que tiene una posición inicial y final, sabe su velocidad, tiene un color, lleva un contador interno y se elimina cuando llega a su destino.
-
 function FuegoAuto() {
-  this.x = 0; // Punto Actual
-  this.y = 0; // Punto Actual
-  this.sx = 0; // Punto De Partida
-  this.sy = 0; // Punto De Partida
-  this.tx = 0; // Punto De Objetivo
-  this.ty = 0; // Punto De Objetivo
-  this.vx = 0; // Dirección hacia donde va
-  this.vy = 0; // Dirección hacia donde va
-  this.color = "#fff";
-  this.velocidad = aleatorio(700, 1200); // Velocidad Inicial del disparo
-  this.gravedad = 1.5; // Fuerza Gravitacional (Cae el fuego artificial)
-  this.ms = 0; // Guardamos el tiempo por fotograma(milisegundos)
-  this.contador = 0; // Cronómetro para saber cuándo explota
-  this.eliminar = false; // Saber cuándo eliminamos el fuego artificial (osea si ya explotó)
+  // Posición Inicial Del Fuego Artificial
+  this.x = this.sx = aleatorio(100, ancho - 100);
+  this.y = this.sy = alto;
 
-  // Cerebro [Mover, Decidir si explota]
-  this.actualizar = function (ms) {
-    this.ms = ms / 1000;
-    if (this.contador > 2000 / ms) {
-      crearParticulas(1, 30, this.x, this.y, this.color);
+  // Objetivo Del Fuego Artificial
+  this.tx = aleatorio(100, ancho - 100);
+  this.ty = aleatorio(alto * 0.1, alto * 0.7);
+
+  // Disparar En Cualquier Dirección
+  const angulo = Math.atan2(this.ty - this.sy, this.tx - this.sx);
+
+  // Proyectil Sube Exactamente En La Dirección Del Objetivo
+  this.velocidad = aleatorio(8, 12); // Cuantos Píxeles Avanza Por Frame
+  this.vx = Math.cos(angulo) * this.velocidad;
+  this.vy = Math.sin(angulo) * this.velocidad;
+
+  // Color Del Fuego Artificial
+  this.paleta = paletaColores[Math.floor(Math.random() * paletaColores.length)];
+  this.colorProyectil = this.paleta[0] + "0.8)";
+
+  // Dibujar Estela -|- Eliminar Fuego Artificial
+  this.posicionesPrevias = [];
+  this.eliminar = false;
+
+  this.actualizar = function () {
+    // Dibujar Estela
+    this.posicionesPrevias.push({ x: this.x, y: this.y });
+    if (this.posicionesPrevias.length > 1) this.posicionesPrevias.shift(); //Si Tengo Más De 1 Posición Guardada, Elimino La Más Vieja
+
+    this.x += this.vx;
+    this.y += this.vy;
+
+    // Eliminar Fuego Artificial
+    if (obtenerDistancia(this.x, this.y, this.tx, this.ty) < this.velocidad) {
+      const cantidad = aleatorio(minParticulas, maxParticulas, true);
+      crearParticulas(cantidad, this.x, this.y, this.paleta);
       this.eliminar = true;
-    } else {
-      this.velocidad *= 0.98;
-      this.x -= this.vx * this.velocidad * this.ms;
-      this.y -= this.vy * this.velocidad * this.ms - this.gravedad;
     }
-    this.contador++;
   };
 
-  // Cuerpo [Mostrarlo en pantalla]
   this.dibujar = function () {
+    let ultimaPos = this.posicionesPrevias[0] ?? { x: this.x, y: this.y };
+
     ctx.beginPath();
-    ctx.fillStyle = this.color; // Color del Fuego Artificial
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = "000"; // Color del Background
-    ctx.arc(this.x, this.y, 1, 0, 2 * Math.PI);
-    ctx.fill();
+    ctx.moveTo(ultimaPos.x, ultimaPos.y); // Punto Inicial (Posición Anterior)
+    ctx.lineTo(this.x, this.y); // Línea Hasta La Posición Actual (Crea La Estela)
+    ctx.arc(this.x, this.y, 1.5, 0, 2 * Math.PI); // Dibujamos Bola (Punta Del Proyectil)
+    ctx.strokeStyle = this.colorProyectil;
+    ctx.stroke();
   };
 }
 
 //
-// 3.1 Función y Clase para tirar el fuego artificial y que explote justo donde damos click (OPCIONAL)
+// 3.1 Lanzar Fuego con Click
 //
-
 function lanzarFuegoClick(x, y) {
   const fuego = new FuegoClick(x, y);
   fuegos.push(fuego);
@@ -155,151 +128,155 @@ function lanzarFuegoClick(x, y) {
 }
 
 function FuegoClick(tx, ty) {
-  this.x = aleatorio(100, ancho - 100);
-  this.y = alto;
+  // Posición Inicial Del Fuego Artificial
+  this.x = this.sx = aleatorio(100, ancho - 100);
+  this.y = this.sy = alto;
+
+  // Objetivo Del Fuego Artificial
   this.tx = tx;
   this.ty = ty;
-  this.color = obtenerColor();
-  this.velocidad = 5;
+
+  // Disparar En Cualquier Dirección (Ángulo En RAD)
+  const angulo = Math.atan2(this.ty - this.sy, this.tx - this.sx);
+
+  // Proyectil Sube Exactamente En La Dirección Del Objetivo
+  this.velocidad = aleatorio(8, 12); // Cuantos Píxeles Avanza Por Frame
+  this.vx = Math.cos(angulo) * this.velocidad;
+  this.vy = Math.sin(angulo) * this.velocidad;
+
+  // Color Del Fuego Artificial
+  this.paleta = paletaColores[Math.floor(Math.random() * paletaColores.length)];
+  this.colorProyectil = this.paleta[0] + "0.8)";
+
+  // Dibujar Estela -|- Eliminar Fuego Artificial
+  this.posicionesPrevias = [];
   this.eliminar = false;
 
   this.actualizar = function () {
-    const dx = this.tx - this.x;
-    const dy = this.ty - this.y;
-    const distancia = Math.sqrt(dx * dx + dy * dy);
+    // Dibujar Estela
+    this.posicionesPrevias.push({ x: this.x, y: this.y });
+    if (this.posicionesPrevias.length > 1) this.posicionesPrevias.shift();
 
-    if (distancia < 3) {
-      crearParticulas(1, 30, this.x, this.y, this.color);
+    this.x += this.vx;
+    this.y += this.vy;
+
+    // Eliminar Fuego Artificial
+    if (obtenerDistancia(this.x, this.y, this.tx, this.ty) < this.velocidad) {
+      const cantidad = aleatorio(minParticulas, maxParticulas, true);
+      crearParticulas(cantidad, this.x, this.y, this.paleta);
       this.eliminar = true;
-      return;
     }
-
-    this.x += (dx / distancia) * this.velocidad;
-    this.y += (dy / distancia) * this.velocidad;
   };
 
   this.dibujar = function () {
+    let ultimaPos = this.posicionesPrevias[0] ?? { x: this.x, y: this.y };
+
     ctx.beginPath();
-    ctx.fillStyle = this.color;
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = "#000";
-    ctx.arc(this.x, this.y, 1.5, 0, 2 * Math.PI);
-    ctx.fill();
+    ctx.moveTo(ultimaPos.x, ultimaPos.y); // Punto Inicial (Posición Anterior)
+    ctx.lineTo(this.x, this.y); // Línea Hasta La Posición Actual (Crea La Estela)
+    ctx.arc(this.x, this.y, 1.5, 0, 2 * Math.PI); // Dibujamos Bola (Punta Del Proyectil)
+    ctx.strokeStyle = this.colorProyectil;
+    ctx.stroke();
   };
 }
 
 //
-// 4. Crear las partículas
+// 4. Crear Partículas
 //
+function crearParticulas(cantidad, x, y, colores) {
+  for (let i = 0; i < cantidad; i++) {
+    particulas.push(new Particula(x, y, colores));
+  }
 
-function crearParticulas(tipo, cantidad, x, y, color) {
   // Reproducir sonido
   //const sonido = new Audio("Sonidos/Particula.MP3");
   //sonido.play();
-
-  for (let i = 0; i < cantidad; i++) {
-    const p = new Particula();
-    p.tipo = tipo;
-    p.color = color;
-    p.x = x;
-    p.y = y;
-    const angulo = aleatorio(0, 360);
-    p.vx = Math.cos((angulo * Math.PI) / 180.0);
-    p.vy = Math.sin((angulo * Math.PI) / 180.0);
-    p.velocidad = aleatorio(150, 600); // Velocidad inicial personalizada
-    particulas.push(p);
-  }
 }
 
-// Aqui creamos las particulas
-function Particula() {
-  this.x = 0; // Posición Actual
-  this.y = 0; // Posición Actual
-  this.vx = 0; // Dirección
-  this.vy = 0; // Dirección
-  this.velocidad = aleatorio(200, 500); // Que tan rápido se mueve
-  this.gravedad = 1; // Gravedad (Caiga con el tiempo)
-  this.viento = 0; // Viento (Desvíe a los lados [No caiga e n línea recta])
-  this.tipo = 1; // Tipo de fuego artificial (1)
-  this.opacidad = 1; // Transparencia (Baja con el tiempo)
-  this.contador = 0; // Cronómetro de vida
-  this.escala = 1;
-  this.color = "#fff"; // Color
+function Particula(x, y, colores) {
+  this.x = x;
+  this.y = y;
+  this.velocidad = Math.random() * 6 + 2; // Velocidad Inicial Aleatoria (2–8 PX/Frame)
+  this.angulo = Math.random() * (Math.PI * 2); // Dirección Aleatoria (0–360° En Radianes)
+  this.facilidad = 0.2; // Reducción De Velocidad Por Frame (Simula Fricción)
+  this.gravedad = Math.random() * 3 + 0.1; // Gravedad inicial
+  this.alpha = 0.9; // Opacidad Inicial
+  this.color = Math.random() < 0.7 ? colores[0] : colores[1];
+  this.posicionesPrevias = [];
 
-  this.actualizar = function (ms) {
-    this.ms = ms / 1000;
-    if (this.contador > 900 / ms) {
-      this.opacidad = Math.max(0, this.opacidad - 0.05);
-    }
-    if (this.tipo === 1) {
-      this.viento = Math.sin(this.contador / 10) * 0.5;
-      this.velocidad *= 0.96;
-      this.x -= this.vx * this.velocidad * this.ms + this.viento;
-      this.y -= this.vy * this.velocidad * this.ms - this.gravedad;
-    }
-    this.contador++;
+  this.actualizar = function () {
+    if (this.alpha <= 0) return; // Si Ya Es Invisible, No Seguimos
+
+    // Guardar Posición Actual Para Dibujar Estela
+    this.posicionesPrevias.push({ x: this.x, y: this.y });
+    if (this.posicionesPrevias.length > 2) this.posicionesPrevias.shift();
+
+    // Frenar La Partícula Poco A Poco
+    if (this.velocidad > 1) this.velocidad -= this.facilidad;
+
+    // Desvanecer Lentamente
+    this.alpha -= 0.01;
+
+    // Incrementar Gravedad Para Que Caiga Más Rápido Con El Tiempo
+    this.gravedad += 0.01;
+
+    // Actualizar Posición Usando Trigonometría (Ángulo En Movimiento Horizontal y Vertical)
+    this.x += Math.cos(this.angulo) * this.velocidad;
+    this.y += Math.sin(this.angulo) * this.velocidad + this.gravedad;
   };
 
   this.dibujar = function () {
-    ctx.save();
-    ctx.globalAlpha = this.opacidad;
-    ctx.fillStyle = this.color;
-    ctx.shadowBlur = 6;
-    ctx.shadowColor = this.color;
+    if (this.alpha <= 0) return; // No Dibujamos Partículas Invisibles
+
+    let ultimaPos = this.posicionesPrevias[0] ?? { x: this.x, y: this.y };
+
     ctx.beginPath();
-    ctx.arc(this.x, this.y, 1.5, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.restore();
+    ctx.moveTo(ultimaPos.x, ultimaPos.y);
+    ctx.lineTo(this.x, this.y);
+    ctx.strokeStyle = this.color + this.alpha + ")";
+    ctx.stroke();
   };
 }
 
 //
-// 5. Evento del Mouse
+// 5. Evento Mouse
 //
-
 canvas.addEventListener("mousedown", function (evt) {
-  const boton = evt.which || evt.button;
-  if (boton === 1) {
+  if (evt.button === 0) {
     lanzarFuegoClick(evt.clientX, evt.clientY);
   }
 });
 
 //
-// 6. Funcion Animar
+// 6. Animar
 //
-
 function animar() {
   requestAnimationFrame(animar);
 
-  ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+  // Dibujar Fondo
   ctx.fillRect(0, 0, ancho, alto);
 
+  // Ver Si Toca Lanzar Un Fuego Automático
   if (temporizador > siguienteDisparo) {
     lanzarFuegoAuto();
-    siguienteDisparo = temporizador + intervaloFuego / tasaFPS;
+    siguienteDisparo = temporizador + intervaloFuego / 60;
   }
 
+  // Actualizar y Dibujar Todos Los Proyectiles
   for (let i = fuegos.length - 1; i >= 0; i--) {
-    if (fuegos[i].eliminar) {
-      fuegos.splice(i, 1);
-    } else {
-      fuegos[i].actualizar(retardoFotograma);
-      fuegos[i].dibujar();
-    }
+    fuegos[i].actualizar();
+    fuegos[i].dibujar();
+    if (fuegos[i].eliminar) fuegos.splice(i, 1);
   }
 
+  // Actualizar y Dibujar Todas Las Particulas
   for (let i = particulas.length - 1; i >= 0; i--) {
-    if (particulas[i].opacidad === 0) {
-      particulas.splice(i, 1);
-    } else {
-      particulas[i].actualizar(retardoFotograma);
-      particulas[i].dibujar();
-    }
+    particulas[i].actualizar();
+    particulas[i].dibujar();
+    if (particulas[i].alpha <= 0) particulas.splice(i, 1);
   }
 
   temporizador++;
 }
 
 animar();
-
-
