@@ -68,7 +68,7 @@ function FuegoAuto() {
   this.y = this.sy = alto;
 
   // Objetivo Del Fuego Artificial
-  this.tx = aleatorio(100, ancho - 100);
+  this.tx = aleatorio(100, ancho - 100); // this.tx = this.sx (Para Que Sea Solo Vertical)
   this.ty = aleatorio(alto * 0.1, alto * 0.7);
 
   // Disparar En Cualquier Dirección
@@ -280,4 +280,5 @@ function animar() {
 }
 
 animar();
+
 
