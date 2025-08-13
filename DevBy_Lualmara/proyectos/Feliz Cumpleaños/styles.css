@@ -1,0 +1,620 @@
+html {
+  overflow: hidden; 
+}
+
+body {
+  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/*Confeti Atras*/
+#canvas1 {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  display: block;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/*PortaRetrato*/
+.portaretrato {
+  position: absolute;
+  top: 420px;
+  left: 510px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.marco {
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  background-color: #bb7d4e; 
+  border: 5px solid #8a5e3c; 
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marco img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.soporte-marco {
+  width: 50px;
+  height: 15px;
+  background-color: #8a5e3c; 
+  margin-top: -5px;
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+}
+
+/*Torta De Cumpleaños*/
+.torta-cumpleaños {
+  position: relative;
+  top: 20px;
+}
+
+.soporte {
+  position: absolute;
+  width: 500px;
+  height: 20px;
+  border-radius: 100px;
+  background-color: #4A4A4A;
+  left: -260px;
+  top: 100px;
+}
+
+.soporte::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 250px;
+  background-color: #4A4A4A;
+  left: 190px;
+  top: 20px;
+}
+
+.soporte::after {
+  content: "";
+  position: absolute;
+  background-color: rgba(255, 182, 193, 1);
+  width: 95px;
+  height: 205px;
+  border-radius: 30px 30px 0 0;
+  left: 131px;
+  top: 20px;
+  box-shadow: 125px 0 rgba(255, 182, 193, 1);
+}
+
+.torta {
+  position: absolute;
+  overflow: hidden;
+  width: 274px;
+  height: 140px;
+  background-color: #FDE8C8;
+  top: -40px;
+  left: -170px;
+  border-radius: 30px 30px 0 0;
+}
+
+.torta:before {
+  content: "";
+  position: absolute;
+  background-color: #ff9393;
+  width: 275px;
+  height: 15px;
+  top: 75px;
+  box-shadow: 0 30px #ff9393;
+}
+
+.torta:after {
+  content: "";
+  position: absolute;
+  background-color: #ff5959;
+  width: 275px;
+  height: 40px;
+}
+
+.chocolate {
+  position: absolute;
+  background-color: #ff5959;
+  width: 25px;
+  height: 45px;
+  top: 25px;
+  left: 0;
+  z-index: 1;
+  border-radius: 50px;
+  box-shadow: 25px 2px #FDE8C8, 50px -10px #ff5959, 
+  75px -5px #FDE8C8, 100px 3px #ff5959,
+  125px 0px #FDE8C8, 150px -5px #ff5959,
+  175px 3px #FDE8C8, 200px -5px #ff5959,
+  225px -10px #FDE8C8, 250px 4px #ff5959;
+}
+
+.vela {
+  position: absolute;
+  width: 15px;
+  height: 70px;
+  background-color: white;
+  top: -110px;
+  left: -40px;
+  box-shadow: inset 0 -10px #FF6F61;
+}
+
+.vela:before {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #FF6F61;
+  top: 10px;
+  box-shadow: 0 25px #FF6F61; 
+}
+
+.vela:after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 15px;
+  background-color: black;
+  top: -15px;
+  left: 6px;
+}
+
+.llama {
+  position: absolute;
+  top: -147px;
+  left: -42.5px;
+  width: 20px;
+  height: 30px;
+  background: radial-gradient(ellipse at bottom, rgba(255, 255, 180, 1) 0%, rgba(255, 200, 0, 0.9) 50%, rgba(255, 120, 0, 0.6) 80%, transparent 100%);
+  border-radius: 50% 50% 50% 50%;
+  filter: blur(0.5px);
+  animation: flama 0.15s infinite alternate ease-in-out;
+  opacity: 0.95;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+@keyframes flama {
+  from {
+    transform: scale(1, 1) translateY(0);
+    background: radial-gradient(ellipse at bottom, rgba(255, 255, 180, 1) 0%, rgba(255, 200, 0, 0.9) 50%, rgba(255, 120, 0, 0.6) 80%, transparent 100%);
+  }
+  50% {
+    transform: scale(1.1, 1.2) translateY(-2px);
+    background: radial-gradient(ellipse at bottom, rgba(255, 255, 200, 1) 0%, rgba(255, 170, 0, 0.85) 50%, rgba(255, 80, 0, 0.5) 80%, transparent 100%);
+  }
+  to {
+    transform: scale(0.9, 1.05) translateY(1px);
+    background: radial-gradient(ellipse at bottom, rgba(255, 250, 180, 1) 0%, rgba(255, 190, 0, 0.88) 50%, rgba(255, 90, 0, 0.55) 80%, transparent 100%);
+  }
+}
+
+/*Todo Oscuro*/
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: black;
+  opacity: 1;
+  z-index: 9999;
+  transition: opacity 1.5s ease;
+}
+.overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes apagar {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(0); opacity: 0; }
+}
+
+/*Caja De Regalo*/
+.caja {
+  position: absolute;
+  width: 150px;
+  height: 160px;
+}
+
+.cinta-de-regalo,
+.cinta-de-regalo-izquierda,
+.cinta-de-regalo-derecha,
+.cinta-de-regalo-centro,
+.regalos,
+.regalo-sombra,
+.regalo {
+  position: absolute;
+}
+
+.cinta-de-regalo-izquierda,
+.cinta-de-regalo-derecha,
+.cinta-de-regalo-centro {
+  background-color: #d22d2d;
+  cursor: pointer;
+}
+
+.cinta-de-regalo {
+  bottom: 55px;
+  left: 238px;
+  width: 34px;
+  height: 23px;
+  animation: cinta 1.5s ease-in-out infinite;
+}
+
+.cinta-de-regalo-centro {
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+}
+
+.cinta-de-regalo-izquierda,
+.cinta-de-regalo-derecha {
+  box-shadow: 0 0 0 8px #fe3f3f inset; 
+  top: 3.4px;
+  width: 45px;
+  height: 57px;
+}
+
+.cinta-de-regalo-izquierda::before,
+.cinta-de-regalo-derecha::before {
+  background-color: #fe3f3f;
+  border-radius: inherit;
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+
+.cinta-de-regalo-izquierda {
+  border-radius: 17px 0 34px 11px / 17px 0 34px 40px;
+  right: calc(100% - 12px);
+  transform: rotate(35deg);
+  transform-origin: 100% 15%;
+}
+
+.cinta-de-regalo-izquierda::before {
+  clip-path: polygon(0 42%, 100% 12%, 100% 100%, 0 100%);
+}
+
+.cinta-de-regalo-derecha {
+  border-radius: 0 17px 11px 34px / 0 17px 40px 34px;
+  left: calc(100% - 12px);
+  transform: rotate(-35deg);
+  transform-origin: 0% 15%;
+}
+
+.cinta-de-regalo-derecha::before {
+  clip-path: polygon(0 12%, 100% 42%, 100% 100%, 0 100%);
+}
+
+.regalos,
+.regalo-sombra,
+.regalo {
+  transform-origin: 50% 100%;
+}
+
+.regalos {
+  animation: base 1.5s ease-in-out infinite;
+  background: linear-gradient(#fe3f3f, #fe3f3f) 50% 50% / 32px 100%
+  no-repeat, #e9e3e3;
+  border-radius: 16px;
+  bottom: -40px;
+  left: 195px;
+  overflow: hidden;
+  width: 120.4px;
+  height: 80px;
+  cursor: pointer;
+}
+
+.regalo-sombra,
+.regalo {
+  border-radius: 10px;
+  width: 133px;
+  height: 34px;
+}
+
+.regalo {
+  animation: techo 1.5s ease-in-out infinite;
+  background: linear-gradient(#fe3f3f, #fe3f3f) 50% 50% / 32px 101% 
+  no-repeat, #efffee;
+  bottom: 37px;
+  left: 188.5px;
+  cursor: pointer;
+}
+
+.regalo-sombra {
+  animation: sombra 1.5s ease-in-out infinite;
+  background-color: #00000010;
+  top: -23px;
+  left: -10px;
+}
+
+.icono-estrella {
+  position: absolute;
+  background-color: #fcff50;
+  clip-path: polygon(50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0 50%, 35% 35%);
+}
+
+.estrella1 {
+  animation: estrella1 1.5s ease-in-out infinite;
+  animation-delay: calc(1.5s * 0.5);
+  top: 120px;
+  left: 320px;
+  width: 28px;
+  height: 28px;
+}
+
+.estrella2 {
+  animation: estrella2 1.5s ease-in-out infinite;
+  animation-delay: calc(1.5s * 0.125);
+  top: 45px;
+  left: 300px;
+  width: 28px;
+  height: 28px;
+}
+
+.estrella3 {
+  animation: estrella1 1.5s ease-in-out infinite;
+  animation-delay: calc(1.5s * 0.25);
+  top: 100px;
+  left: 250px;
+  width: 20px;
+  height: 20px;
+}
+
+.estrella4 {
+  animation: estrella2 1.5s ease-in-out infinite;
+  top: 150px;
+  left: 180px;
+  width: 28px;
+  height: 28px;
+}
+
+.estrella5 {
+  animation: estrella2 1.5s ease-in-out infinite;
+  animation-delay: calc(1.5s * 0.375);
+  top: 50px;
+  left: 180px;
+  width: 20px;
+  height: 20px;
+}
+
+/*Animaciones Regalo*/
+@keyframes cinta {
+  from,
+  50% {
+    transform: translateY(0) rotate(0);
+  }
+  62.5% {
+    transform: translateY(75%) rotate(0);
+  }
+  68.75% {
+    transform: translateY(-37.5%) rotate(15deg);
+  }
+  75% {
+    transform: translateY(-150%) rotate(5deg);
+  }
+  87.5% {
+    transform: translateY(65%) rotate(-3deg);
+  }
+  to {
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes base {
+  from,
+  50% {
+    transform: translateY(0) scale(1, 1);
+  }
+  62.5% {
+    transform: translateY(4%) scale(1.12, 0.89);
+  }
+  75% {
+    transform: translateY(-11%) scale(0.92, 1.1);
+  }
+  87.5% {
+    transform: translateY(0%) scale(1.05, 0.9);
+  }
+  to {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+
+@keyframes techo {
+  from,
+  50% {
+    transform: translateY(0) scale(1, 1) rotate(0);
+  }
+  62.5% {
+    animation-timing-function: ease-in;
+    transform: translateY(45%) scale(1.14, 0.95) rotate(0);
+  }
+  68.75% {
+    animation-timing-function: ease-out;
+    transform: translateY(-22.5%) scale(1.05, 1.03) rotate(15deg);
+  }
+  75% {
+    animation-timing-function: ease-out;
+    transform: translateY(-90%) scale(0.96, 1.1) rotate(5deg);
+  }
+  87.5% {
+    transform: translateY(30%) scale(1.12, 0.93) rotate(-3deg);
+  }
+  to {
+    transform: translateY(0) scale(1, 1) rotate(0);
+  }
+}
+
+@keyframes sombra {
+  from,
+  50% {
+    transform: translateY(0) scale(1, 1) rotate(0);
+  }
+  62.5% {
+    animation-timing-function: ease-in;
+    transform: translateY(10%) scale(1.14, 0.95) rotate(0);
+  }
+  68.75% {
+    animation-timing-function: ease-out;
+    transform: translateY(-10%) scale(1.05, 1.03) rotate(15deg);
+  }
+  75% {
+    animation-timing-function: ease-out;
+    transform: translateY(-30%) scale(0.96, 1.1) rotate(5deg);
+  }
+  87.5% {
+    transform: translateY(10%) scale(1.12, 0.93) rotate(-3deg);
+  }
+  to {
+    transform: translateY(0) scale(1, 1) rotate(0);
+  }
+}
+
+@keyframes estrella1 {
+  from {
+    transform: scale(0) rotate(0);
+  }
+  25% {
+    animation-timing-function: ease-out;
+    transform: scale(1) rotate(0.25turn);
+  }
+  50%,
+  to {
+    transform: scale(0) rotate(0.5turn);
+  }
+}
+
+@keyframes estrella2 {
+  from {
+    transform: scale(0) rotate(0);
+  }
+  25% {
+    animation-timing-function: ease-out;
+    transform: scale(1) rotate(-0.25turn);
+  }
+  50%,
+  to {
+    transform: scale(0) rotate(-0.5turn);
+  }
+}
+
+
+/* Modal */
+.modal-carta {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-carta.activo {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/*Carta*/
+.carta {
+  background: linear-gradient(135deg, #ffeeee, #fbd5e4);
+  padding: 32px;
+  width: 400px;
+  max-width: 80%;
+  border-radius: 12px;
+  border: 3px solid #ffb6c1; 
+  box-shadow: 0 0 25px rgba(255, 182, 193, 0.6);
+  font-family: 'Georgia', serif;
+  position: relative;
+  animation: aparecer 0.8s ease;
+}
+
+.carta h2 {
+  font-family: cursive;
+  font-size: 28px;
+  color: #fd7e91; 
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.carta p {
+  font-size: 17px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.carta .firma {
+  margin-top: 32px;
+  font-style: italic;
+  text-align: right;
+  color: #323232;
+}
+
+/* Animación de entrada */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/*Mensaje*/
+.happy-birthday {
+    position: absolute;
+    top: 150px; 
+    left: 600px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 40px;
+    color: #ff4d6d; 
+    user-select: none;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+    animation: flotar 2s ease-in-out infinite,
+               brillo 1.5s infinite;
+}
+
+/* Animación flotante */
+@keyframes flotar {
+    from, to {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(0, -8px);
+    }
+}
+
+@keyframes brillo {
+  from, to {
+    text-shadow: 0 0 3px #fff, 0 0 6px #ff4d6d, 0 0 9px #ff4d6d;
+  }
+  50% {
+    text-shadow: 0 0 6px #fff, 0 0 12px #ff4d6d, 0 0 18px #ff4d6d;
+  }
+}
+
+
+/*Confeti Delante*/
+#canvas2 {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  display: block;
+  z-index: 2;
+  pointer-events: none;
+}
