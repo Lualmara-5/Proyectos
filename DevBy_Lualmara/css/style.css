@@ -112,6 +112,10 @@ p {
   background: linear-gradient(45deg, #00f7ff, #c0b0f6);
 }
 
+.tag.Celebracion {
+  background: linear-gradient(45deg, #ffcc70, #fbb32d, #ff7e5f);
+}
+
 /*Iconos*/
 
 .heart1 {
@@ -150,6 +154,24 @@ p {
   animation: brillo 1.5s infinite;
 }
 
+.hot1 {
+	position: absolute;
+	font-size: 13px;
+	color: #ff5500;
+	right: -2px;
+	top: 11px;
+  animation: brillo 1.5s infinite;
+}
+
+.hot2 {
+	position: absolute;
+	font-size: 13px;
+	color: #ff5500;
+	right: 67px;
+	bottom: 12px;
+  animation: brillo 1.5s infinite;
+}
+
 /*Animaciones*/
 
 @keyframes latido {
@@ -163,11 +185,11 @@ p {
 
 @keyframes brillo {
   0%, 100% {
-    text-shadow: 0 0 3px #fff, 0 0 6px yellow, 0 0 9px yellow;
+    text-shadow: 0 0 3px #ffcc70, 0 0 6px #fbb32d, 0 0 9px #ff7e5f;
     transform: scale(1);
   }
   50% {
-    text-shadow: 0 0 6px #fff, 0 0 12px yellow, 0 0 18px yellow;
+    text-shadow: 0 0 6px #ffcc70, 0 0 12px #fbb32d, 0 0 18px #ff7e5f;
     transform: scale(1);
   }
 }
