@@ -1,0 +1,77 @@
+/* Mesa */
+.soporte {
+  position: relative;
+  width: 400px;
+  left: 0px;
+  bottom: -50px;
+  height: 20px;
+  border-radius: 100px;
+  background-color: #4A4A4A;
+  margin-top: 0; /* pegado al portaretrato-torta-caja */
+}
+
+.soporte::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 1000px;
+  background-color: #4A4A4A;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 18px;
+}
+
+.soporte::after {
+  content: "";
+  position: absolute;
+  background-color: rgb(255, 182, 193, 1);
+  width: 95px;
+  height: 1000px;
+  border-radius: 30px 30px 0 0; 
+  left: 90px;
+  top: 20px;
+  box-shadow: 125px 0 rgb(255, 182, 193, 1);
+}
+
+/*Mensaje*/
+.happy-birthday {
+  top: -100%;
+}
+
+/*Objetos de la mesa*/
+.portaretrato {
+  transform: scale(0.75);
+  left: 65px;
+  bottom: -12px;
+}
+
+.torta {
+  transform: scale(0.75);
+  left: 15px;
+  bottom: -20px;
+}
+
+.caja {
+  transform: scale(0.75);
+  left: -65px;
+  bottom: -26px;
+}
+
+.vela {
+  transform: scale(0.75);
+  bottom: 94px;
+  left: 145px;
+}
+
+.llama {
+  bottom: 160px;
+  left: 140px;
+}
+
+
+.carta {
+  animation: none; /* Evitar mini zoom */
+  transform: scale(0.8);
+  transform-origin: center center;
+  margin: 0 auto; /* Centrar horizontalmente */
+}
