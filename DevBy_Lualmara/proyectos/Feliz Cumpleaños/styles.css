@@ -20,11 +20,62 @@ body {
   z-index: 0;
 }
 
+/*Ajustamos para dejarlo en caida [contendor  de los objetos / mesa]*/
+.contenedor {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    
+}
+
+/* Portaretrato + torta + caja de regalo */
+.portaretrato-torta-caja {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 520px;
+  gap: 20px;
+  position: relative;
+  bottom: -50px;
+  margin-bottom: 0; /* pegado a la mesa */
+}
+
+/* Mesa */
+.soporte {
+  position: relative;
+  width: 500px;
+  left: -20px;
+  bottom: -50px;
+  height: 20px;
+  border-radius: 100px;
+  background-color: #4A4A4A;
+  margin-top: 0; /* pegado al portaretrato-torta-caja */
+}
+
+.soporte::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 1000px;
+  background-color: #4A4A4A;
+  left: 195px;
+  top: 18px;
+}
+
+.soporte::after {
+  content: "";
+  position: absolute;
+  background-color: rgba(255, 182, 193, 1);
+  width: 95px;
+  height: 1000px;
+  border-radius: 30px 30px 0 0;
+  left: 136px;
+  top: 20px;
+  box-shadow: 125px 0 rgba(255, 182, 193, 1);
+}
+
 /*PortaRetrato*/
 .portaretrato {
-  position: absolute;
-  top: 420px;
-  left: 510px; 
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,39 +110,11 @@ body {
 /*Torta De Cumpleaños*/
 .torta-cumpleaños {
   position: relative;
-  top: 20px;
-}
-
-.soporte {
-  position: absolute;
-  width: 500px;
-  height: 20px;
-  border-radius: 100px;
-  background-color: #4A4A4A;
-  left: -260px;
-  top: 100px;
-}
-
-.soporte::before {
-  content: "";
-  position: absolute;
-  width: 100px;
-  height: 250px;
-  background-color: #4A4A4A;
-  left: 190px;
-  top: 20px;
-}
-
-.soporte::after {
-  content: "";
-  position: absolute;
-  background-color: rgba(255, 182, 193, 1);
-  width: 95px;
-  height: 205px;
-  border-radius: 30px 30px 0 0;
-  left: 131px;
-  top: 20px;
-  box-shadow: 125px 0 rgba(255, 182, 193, 1);
+  width: 274px;  /* mismo ancho que la torta */
+  height: 180px; /* espacio para torta + vela + llama */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .torta {
@@ -100,8 +123,8 @@ body {
   width: 274px;
   height: 140px;
   background-color: #FDE8C8;
-  top: -40px;
-  left: -170px;
+  bottom: 0; /* pegada abajo del contenedor */
+  left: 0; /* centrada horizontalmente */
   border-radius: 30px 30px 0 0;
 }
 
@@ -133,10 +156,10 @@ body {
   z-index: 1;
   border-radius: 50px;
   box-shadow: 25px 2px #FDE8C8, 50px -10px #ff5959, 
-  75px -5px #FDE8C8, 100px 3px #ff5959,
-  125px 0px #FDE8C8, 150px -5px #ff5959,
-  175px 3px #FDE8C8, 200px -5px #ff5959,
-  225px -10px #FDE8C8, 250px 4px #ff5959;
+              75px -5px #FDE8C8, 100px 3px #ff5959,
+              125px 0px #FDE8C8, 150px -5px #ff5959,
+              175px 3px #FDE8C8, 200px -5px #ff5959,
+              225px -10px #FDE8C8, 250px 4px #ff5959;
 }
 
 .vela {
@@ -144,8 +167,8 @@ body {
   width: 15px;
   height: 70px;
   background-color: white;
-  top: -110px;
-  left: -40px;
+  bottom: 140px; /* encima de la torta */
+  left: calc(50% - 7.5px); /* centrada */
   box-shadow: inset 0 -10px #FF6F61;
 }
 
@@ -171,12 +194,12 @@ body {
 
 .llama {
   position: absolute;
-  top: -147px;
-  left: -42.5px;
+  bottom: 210px; /* encima de la vela */
+  left: calc(50% - 10px);
   width: 20px;
   height: 30px;
   background: radial-gradient(ellipse at bottom, rgba(255, 255, 180, 1) 0%, rgba(255, 200, 0, 0.9) 50%, rgba(255, 120, 0, 0.6) 80%, transparent 100%);
-  border-radius: 50% 50% 50% 50%;
+  border-radius: 50%;
   filter: blur(0.5px);
   animation: flama 0.15s infinite alternate ease-in-out;
   opacity: 0.95;
@@ -218,13 +241,23 @@ body {
   to { transform: scale(0); opacity: 0; }
 }
 
-/*Caja De Regalo*/
-.caja {
-  position: absolute;
-  width: 150px;
-  height: 160px;
+.caja-wrapper {
+  transform: scale(0.75);
+  transform-origin: center bottom; /* para que se reduzca hacia el centro y desde la base */
 }
 
+/*Regalo De Cumpleaños*/
+.caja {
+  position: relative;
+  left: -20px;      
+  width: 150px; /* ancho del objeto */
+  height: 180px; /* alto total (caja + cinta + estrellas)*/
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* Elementos de la caja */
 .cinta-de-regalo,
 .cinta-de-regalo-izquierda,
 .cinta-de-regalo-derecha,
@@ -235,16 +268,9 @@ body {
   position: absolute;
 }
 
-.cinta-de-regalo-izquierda,
-.cinta-de-regalo-derecha,
-.cinta-de-regalo-centro {
-  background-color: #d22d2d;
-  cursor: pointer;
-}
-
 .cinta-de-regalo {
-  bottom: 55px;
-  left: 238px;
+  bottom: 100px; /* ajustado para que quede encima */
+  left: calc(50% - 17px);
   width: 34px;
   height: 23px;
   animation: cinta 1.5s ease-in-out infinite;
@@ -254,6 +280,7 @@ body {
   border-radius: 12px;
   width: 100%;
   height: 100%;
+  background-color: #d22d2d;
 }
 
 .cinta-de-regalo-izquierda,
@@ -262,16 +289,7 @@ body {
   top: 3.4px;
   width: 45px;
   height: 57px;
-}
-
-.cinta-de-regalo-izquierda::before,
-.cinta-de-regalo-derecha::before {
-  background-color: #fe3f3f;
-  border-radius: inherit;
-  content: "";
-  display: block;
-  position: absolute;
-  inset: 0;
+  background-color: #d22d2d;
 }
 
 .cinta-de-regalo-izquierda {
@@ -280,8 +298,12 @@ body {
   transform: rotate(35deg);
   transform-origin: 100% 15%;
 }
-
 .cinta-de-regalo-izquierda::before {
+  background-color: #fe3f3f;
+  border-radius: inherit;
+  content: "";
+  position: absolute;
+  inset: 0;
   clip-path: polygon(0 42%, 100% 12%, 100% 100%, 0 100%);
 }
 
@@ -293,100 +315,60 @@ body {
 }
 
 .cinta-de-regalo-derecha::before {
+  background-color: #fe3f3f;
+  border-radius: inherit;
+  content: "";
+  position: absolute;
+  inset: 0;
   clip-path: polygon(0 12%, 100% 42%, 100% 100%, 0 100%);
 }
 
-.regalos,
-.regalo-sombra,
-.regalo {
-  transform-origin: 50% 100%;
-}
-
+/* Base de la caja */
 .regalos {
   animation: base 1.5s ease-in-out infinite;
-  background: linear-gradient(#fe3f3f, #fe3f3f) 50% 50% / 32px 100%
-  no-repeat, #e9e3e3;
+  background: linear-gradient(#fe3f3f, #fe3f3f) 50% 50% / 32px 100% no-repeat, #e9e3e3;
   border-radius: 16px;
-  bottom: -40px;
-  left: 195px;
-  overflow: hidden;
+  bottom: 0;
+  left: calc(50% - 60.2px);
   width: 120.4px;
   height: 80px;
+  overflow: hidden;
   cursor: pointer;
-}
-
-.regalo-sombra,
-.regalo {
-  border-radius: 10px;
-  width: 133px;
-  height: 34px;
 }
 
 .regalo {
   animation: techo 1.5s ease-in-out infinite;
-  background: linear-gradient(#fe3f3f, #fe3f3f) 50% 50% / 32px 101% 
-  no-repeat, #efffee;
-  bottom: 37px;
-  left: 188.5px;
+  background: linear-gradient(#fe3f3f, #fe3f3f) 50% 50% / 32px 101% no-repeat, #efffee;
+  bottom: 77px;
+  left: calc(50% - 66.5px);
+  width: 133px;
+  height: 34px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
 .regalo-sombra {
   animation: sombra 1.5s ease-in-out infinite;
   background-color: #00000010;
-  top: -23px;
-  left: -10px;
+  bottom: 77px;
+  left: calc(50% - 76.5px);
+  width: 133px;
+  height: 34px;
+  border-radius: 10px;
 }
 
+/* Estrellas animadas */
 .icono-estrella {
   position: absolute;
   background-color: #fcff50;
   clip-path: polygon(50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0 50%, 35% 35%);
 }
 
-.estrella1 {
-  animation: estrella1 1.5s ease-in-out infinite;
-  animation-delay: calc(1.5s * 0.5);
-  top: 120px;
-  left: 320px;
-  width: 28px;
-  height: 28px;
-}
-
-.estrella2 {
-  animation: estrella2 1.5s ease-in-out infinite;
-  animation-delay: calc(1.5s * 0.125);
-  top: 45px;
-  left: 300px;
-  width: 28px;
-  height: 28px;
-}
-
-.estrella3 {
-  animation: estrella1 1.5s ease-in-out infinite;
-  animation-delay: calc(1.5s * 0.25);
-  top: 100px;
-  left: 250px;
-  width: 20px;
-  height: 20px;
-}
-
-.estrella4 {
-  animation: estrella2 1.5s ease-in-out infinite;
-  top: 150px;
-  left: 180px;
-  width: 28px;
-  height: 28px;
-}
-
-.estrella5 {
-  animation: estrella2 1.5s ease-in-out infinite;
-  animation-delay: calc(1.5s * 0.375);
-  top: 50px;
-  left: 180px;
-  width: 20px;
-  height: 20px;
-}
+.estrella1 { animation: estrella1 1.5s ease-in-out infinite; animation-delay: calc(1.5s * 0.5);  bottom: 20px;  left: 120px; width: 28px; height: 28px; }
+.estrella2 { animation: estrella2 1.5s ease-in-out infinite; animation-delay: calc(1.5s * 0.125); top: 10px;   left: 100px; width: 28px; height: 28px; }
+.estrella3 { animation: estrella1 1.5s ease-in-out infinite; animation-delay: calc(1.5s * 0.25);  top: 60px;   left: 50px;  width: 20px; height: 20px; }
+.estrella4 { animation: estrella2 1.5s ease-in-out infinite; bottom: 5px;  left: 20px;  width: 28px; height: 28px; }
+.estrella5 { animation: estrella2 1.5s ease-in-out infinite; animation-delay: calc(1.5s * 0.375); top: 20px;   left: 20px;  width: 20px; height: 20px; }
 
 /*Animaciones Regalo*/
 @keyframes cinta {
@@ -508,6 +490,20 @@ body {
   }
 }
 
+/*Mensaje*/
+.happy-birthday {
+    position: absolute;
+    top: -150px; /* Ajusta la distancia vertical desde la torta */
+    left: 20%;
+    transform: translateX(-50%);
+    font-family: cursive;
+    font-size: 40px;
+    color: #ff4d6d; 
+    user-select: none;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+    animation: flotar 2s ease-in-out infinite,
+               brillo 1.5s infinite;
+}
 
 /* Modal */
 .modal-carta {
@@ -575,20 +571,6 @@ body {
   }
 }
 
-/*Mensaje*/
-.happy-birthday {
-    position: absolute;
-    top: 150px; 
-    left: 600px;
-    font-family: 'Great Vibes', cursive;
-    font-size: 40px;
-    color: #ff4d6d; 
-    user-select: none;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
-    animation: flotar 2s ease-in-out infinite,
-               brillo 1.5s infinite;
-}
-
 /* Animación flotante */
 @keyframes flotar {
     from, to {
@@ -607,7 +589,6 @@ body {
     text-shadow: 0 0 6px #fff, 0 0 12px #ff4d6d, 0 0 18px #ff4d6d;
   }
 }
-
 
 /*Confeti Delante*/
 #canvas2 {
