@@ -18,43 +18,51 @@
     <!--Confeti Atras-->
     <canvas id="canvas1"></canvas>
 
-    <!-- PortaRetrato -->
-    <div class="portaretrato">
-      <div class="marco">
-        <img
-          src="/proyectos/Feliz Cumpleaños/recursos/cumpleañero.png"
-          alt="Foto"
-        />
-      </div>
-      <div class="soporte-marco"></div>
-    </div>
+    <div class="contenedor">
+      <!-- PortaRetrato -->
+      <div class="portaretrato-torta-caja">
+        <div class="portaretrato">
+          <div class="marco">
+            <img src="/recursos/cumpleañero.png" alt="Foto" />
+          </div>
+          <div class="soporte-marco"></div>
+        </div>
 
-    <!--Torta De Cumpleaños-->
-    <div class="torta-cumpleaños">
+        <!--Torta De Cumpleaños-->
+        <div class="torta-cumpleaños">
+          <div class="torta">
+            <div class="chocolate"></div>
+          </div>
+          <div class="vela"></div>
+          <div class="llama"></div>
+        </div>
+
+        <!--Caja De Regalo-->
+        <div class="caja-wrapper">
+          <div class="caja">
+            <div class="cinta-de-regalo">
+              <div class="cinta-de-regalo-izquierda"></div>
+              <div class="cinta-de-regalo-derecha"></div>
+              <div class="cinta-de-regalo-centro"></div>
+            </div>
+            <div class="regalos">
+              <div class="regalo-sombra"></div>
+            </div>
+            <div class="regalo"></div>
+            <div class="icono-estrella estrella1"></div>
+            <div class="icono-estrella estrella2"></div>
+            <div class="icono-estrella estrella3"></div>
+            <div class="icono-estrella estrella4"></div>
+            <div class="icono-estrella estrella5"></div>
+          </div>
+        </div>
+
+        <!--Mensaje Feliz Cumpleaños-->
+        <div class="happy-birthday">Happy Birthday</div>
+      </div>
+
+      <!--Mesa-->
       <div class="soporte"></div>
-      <div class="torta">
-        <div class="chocolate"></div>
-      </div>
-      <div class="vela"></div>
-      <div class="llama"></div>
-    </div>
-
-    <!--Caja De Regalo-->
-    <div class="caja">
-      <div class="cinta-de-regalo">
-        <div class="cinta-de-regalo-izquierda"></div>
-        <div class="cinta-de-regalo-derecha"></div>
-        <div class="cinta-de-regalo-centro"></div>
-      </div>
-      <div class="regalos">
-        <div class="regalo-sombra"></div>
-      </div>
-      <div class="regalo"></div>
-      <div class="icono-estrella estrella1"></div>
-      <div class="icono-estrella estrella2"></div>
-      <div class="icono-estrella estrella3"></div>
-      <div class="icono-estrella estrella4"></div>
-      <div class="icono-estrella estrella5"></div>
     </div>
 
     <!-- Carta Modal -->
@@ -71,18 +79,11 @@
       </div>
     </div>
 
-    <!--Mensaje Feliz Cumpleaños-->
-    <div class="happy-birthday">Happy Birthday</div>
-
     <!--Confeti Delante-->
     <canvas id="canvas2"></canvas>
 
     <!--Todo Oscuro-->
-    <audio
-      id="soplido"
-      src="/proyectos/Feliz Cumpleaños/recursos/soplar1.mp3"
-      preload="auto"
-    ></audio>
+    <audio id="soplido" src="/recursos/soplar1.mp3" preload="auto"></audio>
     <audio
       id="cancion"
       src="/proyectos/Feliz Cumpleaños/recursos/cancion.mp3"
@@ -95,4 +96,3 @@
     <script src="Sorpresa.js"></script>
   </body>
 </html>
-
