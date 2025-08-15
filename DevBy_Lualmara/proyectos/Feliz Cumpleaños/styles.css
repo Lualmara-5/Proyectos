@@ -496,7 +496,7 @@ body {
     top: -150px; /* Ajusta la distancia vertical desde la torta */
     left: 20%;
     transform: translateX(-50%);
-    font-family: cursive;
+    font-family: 'Pacifico', cursive;
     font-size: 40px;
     color: #ff4d6d; 
     user-select: none;
@@ -599,3 +599,4 @@ body {
   z-index: 2;
   pointer-events: none;
 }
+
