@@ -1,0 +1,202 @@
+/* GENERAL RESET & GLOBAL SETTINGS */
+:root {
+  --color-bg: #111;
+  --color-cell: #222;
+  --color-border: #555;
+  --color-x: crimson;
+  --color-o: royalblue;
+  --color-win: #4caf50;
+  --color-text: white;
+  --color-btn: #333;
+  --color-selected: #e6c34a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  user-select: none;       /* Evita seleccionar texto con el mouse */
+  -webkit-user-select: none; /* Safari/Chrome */
+  -ms-user-select: none;     /* IE/Edge */
+
+  -webkit-tap-highlight-color: transparent; /* iOS/Android: elimina el flash azul (efecto tactil) */
+
+}
+
+body {
+  height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;     
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+
+/* TABLERO Y CELDAS */
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+
+  /* Para que se adapte a pantallas: */
+  width: min(90vw, 400px);  /* El tablero será máx 400px o 90% del ancho */
+  height: min(90vw, 400px); /* Ancho = Altura = Siempre cuadrado */
+}
+
+.cell {
+  background: var(--color-cell);
+  border: 2px solid var(--color-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  aspect-ratio: 1 / 1; /* Forzamos Cuadrado*/
+}
+
+
+/* HOVER PREVIEW */
+.cell.previewX {
+  background-color: var(--color-x);
+  opacity: 0.9;
+}
+.cell.previewO {
+  background-color: var(--color-o);
+  opacity: 0.9;
+}
+
+/* VISOR DE TURNOS + MODOS */
+.modeRow {
+  display: grid;
+  grid-template-columns: 50px 1fr 50px;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  max-width: 350px;
+  margin: 15px auto 20px auto;
+}
+
+/* Iconos */
+.modeIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; 
+  font-size: 1.4rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+  border: 3px solid #000;
+  background: #444;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.modeIcon:hover {
+  background: #666;
+}
+
+.modeIcon.active {
+  background: var(--color-selected);
+}
+
+
+/* Visor */
+#turnBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: min(45vw, 220px);
+  overflow: hidden;
+  font-size: clamp(22px, 5vw, 28px);
+  font-weight: bold;
+  text-align: center;
+  color: var(--color-text);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
+  border: 3px solid #000; 
+}
+
+.turnSide:first-child {
+  border-right: 3px solid #000;
+}
+
+.turnSide {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0; 
+  background-color: #444;
+  transition: background 0.3s ease;
+}
+
+/* Colores de turno */
+.activeX {
+  background-color: var(--color-x);
+}
+
+.activeO {
+  background-color: var(--color-o);
+}
+
+
+/* CELDAS GANADORAS */
+.winner {
+  background-color: var(--color-win);
+  color: #fff; 
+  box-shadow: 0 0 15px rgba(59, 165, 93, 0.7);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/* MENSAJE GANADOR */
+.winnerJ {
+  margin-top: 20px;
+  color: var(--color-text);
+  font-size: clamp(10px, 5vw, 22px);
+  font-weight: bold;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+
+/* BOTÓN REINICIAR */
+.restartBtn {
+  margin: 18px auto;
+  padding: 10px 20px;
+  border: none;
+  background: var(--color-btn);
+  color: var(--color-text);
+  font-weight: bold;
+  font-size: clamp(10px, 5vw, 18px);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: clamp(90px, 30vw, 130px);
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+}
+
+.restartBtn:hover {
+  background: var(--color-o);
+}
+
+.restartBtn:active {
+  transform: scale(0.95);
+}
