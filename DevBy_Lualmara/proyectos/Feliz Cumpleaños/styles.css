@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  background-color: green;
+  background-color: rgba(255, 182, 193, 1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,7 +36,6 @@ body {
   gap: 20px;
   position: relative;
   bottom: -50px;
-  margin-bottom: 0; /* pegado a la mesa */
 }
 
 /* Mesa */
@@ -48,7 +47,6 @@ body {
   height: 20px;
   border-radius: 100px;
   background-color: #4A4A4A;
-  margin-top: 0; /* pegado al portaretrato-torta-caja */
 }
 
 .soporte::before {
@@ -599,4 +597,5 @@ body {
   z-index: 2;
   pointer-events: none;
 }
+
 
