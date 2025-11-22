@@ -100,11 +100,7 @@ p {
   background-color: #fff1a0;
 }
 
-.tag.Canva {
-  background-color: #CBAACB;
-}
-
-.tag.San-Valentín {
+.tag.Dedicatorias {
   background: linear-gradient(45deg, #ffb6c1 ,#ff899b, #fa3b58);
 }
 
@@ -112,19 +108,18 @@ p {
   background: linear-gradient(45deg, #00f7ff, #c0b0f6);
 }
 
-.tag.Celebracion {
-  background: linear-gradient(45deg, #ffcc70, #fbb32d, #ff7e5f);
+.tag.Videojuegos {
+  background: linear-gradient(45deg, #9cf9c4, #b597f5, #d2f994);
 }
 
 /*Iconos*/
-
 .heart1 {
 	position: absolute;
 	font-size: 13px;
 	color: red;
 	right: -3px;
 	top: 13px;
-	animation: latido 1.5s infinite;
+	animation: latido 1.5s infinite, brilloDedicatorias 1.5s infinite;
 }
 
 .heart2 {
@@ -133,7 +128,7 @@ p {
 	color: red;
 	right: 71px;
 	bottom: 11px;
-	animation: latido 1.5s infinite;
+	animation: latido 1.5s infinite, brilloDedicatorias 1.5s infinite;
 }
 
 .star1 {
@@ -142,7 +137,7 @@ p {
 	color: yellow;
 	right: -3px;
 	top: 12px;
-  animation: brillo 1.5s infinite;
+  animation: brilloVisual-Effects 1.5s infinite;
 }
 
 .star2 {
@@ -151,25 +146,25 @@ p {
 	color: yellow;
 	right: 76px;
 	bottom: 13px;
-  animation: brillo 1.5s infinite;
+  animation: brilloVisual-Effects 1.5s infinite;
 }
 
-.hot1 {
+.invader1 {
 	position: absolute;
 	font-size: 13px;
-	color: #ff5500;
+	color: #4e7371;
 	right: -2px;
 	top: 11px;
-  animation: brillo 1.5s infinite;
+  animation: brilloVideojuegos 1.5s infinite;
 }
 
-.hot2 {
+.invader2 {
 	position: absolute;
 	font-size: 13px;
-	color: #ff5500;
-	right: 67px;
+	color: #4e7371;
+	right: 69px;
 	bottom: 12px;
-  animation: brillo 1.5s infinite;
+  animation: brilloVideojuegos 1.5s infinite;
 }
 
 /*Animaciones*/
@@ -183,7 +178,18 @@ p {
   }
 }
 
-@keyframes brillo {
+@keyframes brilloDedicatorias {
+  0%, 100% {
+    text-shadow: 0 0 3px #ff8fb1, 0 0 6px #ff4f81, 0 0 9px #ff99c8;   
+    transform: scale(1);
+  }
+  50% {
+    text-shadow: 0 0 6px #ff8fb1, 0 0 12px #ff4f81, 0 0 18px #ff99c8;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes brilloVisual-Effects {
   0%, 100% {
     text-shadow: 0 0 3px #ffcc70, 0 0 6px #fbb32d, 0 0 9px #ff7e5f;
     transform: scale(1);
@@ -191,5 +197,16 @@ p {
   50% {
     text-shadow: 0 0 6px #ffcc70, 0 0 12px #fbb32d, 0 0 18px #ff7e5f;
     transform: scale(1);
+  }
+}
+
+@keyframes brilloVideojuegos {
+  0%, 100% {
+    text-shadow: 0 0 3px #b597f5, 0 0 6px #9cf9c4, 0 0 9px #d2f994;
+    transform: scale(1);
+  }
+  50% {
+    text-shadow: 0 0 6px #b597f5, 0 0 12px #9cf9c4, 0 0 18px #d2f994;
+    transform: scale(1.1);
   }
 }
