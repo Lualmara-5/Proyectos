@@ -127,7 +127,7 @@ body {
   .heart {
     height: 20vh;
     width: 20vh;
-    bottom: -3vh;
+    bottom: 5vh;
   }
 
   .heart::before,
@@ -145,12 +145,12 @@ body {
   }
 
   .timer {
-    top: 45vh;
-    font-size: clamp(0.8rem, 4vw, 0.8rem);
+    top: 37vh;
+    font-size: clamp(0.7rem, 4vw, 0.7rem);
   }
 
   .mensaje {
-    top: 10vh;
+    top: 5vh;
     font-size: clamp(1.2rem, 9vw, 1.8rem);
   }
 }
