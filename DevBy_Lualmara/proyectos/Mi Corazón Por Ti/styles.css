@@ -146,7 +146,7 @@ body {
 
   .timer {
     top: 37vh;
-    font-size: clamp(0.7rem, 4vw, 0.7rem);
+    font-size: 0.7rem
   }
 
   .mensaje {

@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+* {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+/* FONDO ANIMADO (CORAZONES) */
+.floating-heart {
+  position: fixed;
+  top: -10vh;
+  transform: translateY(0);
+  animation-name: heartFall;
+  animation-timing-function: linear;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+@keyframes heartFall {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(120vh) rotate(360deg); }
+}
+
+/* CONTENIDO PRINCIPAL */
+.container {
+  text-align: center;
+  z-index: 10;
+}
+
+h1 {
+  font-size: 2.2rem;
+  color: white;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+
+/* BOTONES */
+button {
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  font-family: inherit;
+}
+
+#yesBtn {
+  background: #ff4f7b;
+  color: white;
+  box-shadow: 0 5px 15px rgba(255, 79, 123, 0.4);
+}
+
+#yesBtn:hover {
+  transform: scale(1.1);
+}
+
+#noBtn {
+  background: white;
+  color: #ff4f7b;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+#noBtn:hover {
+  transform: scale(1.1);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 182, 193, 0.35);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #ffe6ed;
+  width: 85%;
+  max-width: 380px;
+  padding: 25px;
+  border-radius: 25px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(255, 105, 180, 0.4);
+  animation: popIn 0.6s ease forwards;
+}
+
+/* GIF */
+.modal-gif {
+  width: 130px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+}
+
+/* Texto del modal */
+.modal-content h2 {
+  font-size: 1.8rem;
+  color: #ff4f9d;
+}
+
+.modal-content p {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+/* Botón cerrar */
+#closeModal {
+  background: #ff4f9d;
+  padding: 10px 25px;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 1rem;
+  box-shadow: 0 5px 15px rgba(255, 79, 157, 0.4);
+}
+
+#closeModal:hover {
+  transform: scale(1.08);
+}
+
+/* ANIMACIONES */
+@keyframes popIn {
+  from { transform: scale(0.6); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* Vibración del botón NO */
+.shake {
+  animation: shakeAnim 0.15s infinite;
+}
+
+@keyframes shakeAnim {
+  0% { transform: translateX(2px); }
+  25% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
