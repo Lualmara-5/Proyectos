@@ -24,39 +24,12 @@ function moveNoButton(strength = 1) {
 }
 
 //
-// 2. Vibrar (Simula Miedo)
-//
-function vibrateNoButton() {
-  noBtn.classList.add("shake");
-
-  setTimeout(() => {
-    noBtn.classList.remove("shake");
-  }, 1000);
-}
-
-//
-// 3. Escapar por click
+// 2. Escapar por click
 //
 noBtn.addEventListener("click", () => moveNoButton());
 
 //
-// 4. Escapar si esta cerca
-//
-document.addEventListener("mousemove", (e) => {
-  const rect = noBtn.getBoundingClientRect();
-
-  const distancia = Math.hypot(
-    e.clientX - (rect.left + rect.width / 2),
-    e.clientY - (rect.top + rect.height / 2)
-  );
-
-  if (distancia < 140 && window.innerWidth > 768) {
-    moveNoButton(2.2);
-  }
-});
-
-//
-// 5. Modal
+// 3. Modal
 //
 yesBtn.addEventListener("click", () => {
   modal.classList.remove("hidden");
@@ -71,7 +44,7 @@ modal.addEventListener("click", (e) => {
 });
 
 //
-// 6. Lluvia de Corazones
+// 4. Lluvia de Corazones
 //
 
 const heartStyles = ["❤️", "💓", "💖"];
