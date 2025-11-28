@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Encuentra las Parejas</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <section class="section">
+      <h1>Encuentra las Parejas</h1>
+
+      <div class="info-panel">
+        <p><strong>Tiempo:</strong> <span id="tiempo">00:00</span></p>
+        <p><strong>Movimientos:</strong> <span id="movimientos">0</span></p>
+        <p><strong>Parejas:</strong> <span id="parejas">0 / 8</span></p>
+      </div>
+
+      <div class="board">
+        <div class="card" onclick="Uncover(0)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(1)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(2)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(3)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(4)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(5)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(6)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(7)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(8)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(9)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(10)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(11)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(12)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(13)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(14)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+
+        <div class="card" onclick="Uncover(15)">
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+      </div>
+
+      <button id="reiniciar">Reiniciar</button>
+
+      <div class="win-screen hidden">
+        <h2>¡Ganaste! Siuuu</h2>
+        <p class="result-time">Tiempo: 00:00</p>
+        <p class="result-moves">Movimientos: 0</p>
+
+        <button id="btn-restart-win">Jugar de nuevo</button>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
