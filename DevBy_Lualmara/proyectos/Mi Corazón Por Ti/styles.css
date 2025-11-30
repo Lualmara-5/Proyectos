@@ -3,14 +3,14 @@
   padding: 0;
   box-sizing: border-box;
   user-select: none;
-  -webkit-tap-highlight-color: transparent; 
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {
-  --bg-color: #0b1522;       
-  --heart-color: #ff2c61;    
-  --text-color-timer: #aa1238; ;
-  --text-color-mensaje: #b6c0cc; 
+  --bg-color: #0b1522;
+  --heart-color: #ff2c61;
+  --text-color-timer: #aa1238;
+  --text-color-mensaje: #b6c0cc;
 }
 
 body {
@@ -29,10 +29,10 @@ body {
 
 .heart {
   position: relative;
-  bottom: -5vh;
-  height: 42vh;     
-  width: 42vh;     
-  transform: rotate(-45deg);  
+  bottom: -40px;       
+  height: 300px;        
+  width: 300px;        
+  transform: rotate(-45deg);
   background-color: var(--heart-color);
   box-shadow: -10px 10px 90px var(--heart-color);
   cursor: pointer;
@@ -43,8 +43,8 @@ body {
 .heart::after {
   content: "";
   position: absolute;
-  height: 42vh;
-  width: 42vh;
+  height: 300px;   
+  width: 300px;     
   min-width: 90px;
   min-height: 90px;
   background-color: var(--heart-color);
@@ -52,12 +52,12 @@ body {
 }
 
 .heart::before {
-  top: -21vh; 
+  top: -160px;       
   box-shadow: -10px -10px 90px var(--heart-color);
 }
 
 .heart::after {
-  left: 21vh; 
+  left: 160px;        
   box-shadow: 10px 10px 90px var(--heart-color);
 }
 
@@ -77,20 +77,14 @@ body {
 }
 
 @keyframes heart2 {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.08);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
 }
 
 .timer {
   position: absolute;
-  top: 42vh;
+  top: 300px;           
   color: var(--text-color-timer);
   text-align: center;
   font-family: "Chela One", system-ui;
@@ -100,9 +94,9 @@ body {
   cursor: pointer;
 }
 
-.mensaje { 
+.mensaje {
   position: relative;
-  top: 17vh;
+  top: 140px;          
   margin-top: 10px;
   font-family: "Dancing Script", cursive;
   font-size: clamp(1.3rem, 10vw, 2rem);
@@ -125,32 +119,32 @@ body {
 /* Responsive Telefono */
 @media (max-width: 600px) {
   .heart {
-    height: 20vh;
-    width: 20vh;
-    bottom: 5vh;
+    height: 160px;       
+    width: 160px;        
+    bottom: 60px;         
   }
 
   .heart::before,
   .heart::after {
-    height: 20vh;
-    width: 20vh;
+    height: 160px;
+    width: 160px;
   }
 
   .heart::before {
-    top: -10vh;
+    top: -80px;          
   }
 
   .heart::after {
-    left: 10vh;
+    left: 80px;          
   }
 
   .timer {
-    top: 37vh;
-    font-size: 0.7rem
+    top: 330px;          
+    font-size: 0.7rem;
   }
 
   .mensaje {
-    top: 5vh;
-    font-size: clamp(1.2rem, 9vw, 1.8rem);
+    top: 0px;          
+    font-size: 1.8rem;
   }
 }
