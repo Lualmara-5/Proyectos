@@ -84,7 +84,7 @@ body {
 
 .timer {
   position: absolute;
-  top: 300px;           
+  top: 280px;           
   color: var(--text-color-timer);
   text-align: center;
   font-family: "Chela One", system-ui;
@@ -139,7 +139,7 @@ body {
   }
 
   .timer {
-    top: 330px;          
+    top: 280px;          
     font-size: 0.7rem;
   }
 
