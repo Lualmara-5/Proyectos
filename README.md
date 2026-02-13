@@ -4,7 +4,7 @@
 
 ¡Explora todos los proyectos disponibles desde esta vista central!
 
-![Vista previa del proyecto](imagenes/portada-grid.png)
+![Vista previa del proyecto](Fondo.png)
 
 ---
 
