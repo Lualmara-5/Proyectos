@@ -220,7 +220,7 @@ const layoutDesktop = [
 //    Fila 2 (AMO): y entre 58% y 88%
 const layoutMobile = [
   // ── T (índices 0-3) — fila 1, lado izquierdo
-  { x: 12, y: 15, connections: [1] }, // 0 top-left
+  { x: 12, y: 5, connections: [1] }, // 0 top-left
   { x: 22, y: 15, connections: [2] }, // 1 top-mid
   { x: 32, y: 15, connections: [] }, // 2 top-right
   { x: 22, y: 35, connections: [1] }, // 3 bottom (pata vertical)
