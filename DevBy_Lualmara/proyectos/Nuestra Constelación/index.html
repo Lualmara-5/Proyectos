@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Nuestra Constelación</title>
+
+    <link rel="icon" type="image/png" href="/assets/images/icon.png" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.9.1/fonts/remixicon.min.css"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <!-- Botón de música: esquina superior derecha -->
+    <button class="music-btn" aria-label="Música">
+      <i class="ri-music-2-fill"></i>
+    </button>
+
+    <main class="container">
+      <!-- Encabezado centrado -->
+      <header class="header">
+        <h1 class="title">Nuestra Constelación</h1>
+        <p class="subtitle">
+          Cada estrella, un recuerdo. Cada conexión, nuestro amor.
+        </p>
+      </header>
+
+      <!-- Zona de constelación -->
+      <div class="constellation">
+        <canvas id="starCanvas"></canvas>
+      </div>
+    </main>
+
+    <!-- Hint: esquina inferior izquierda -->
+    <p class="hint">
+      <i class="ri-cursor-hand"></i>
+      <span>Haz click en una estrella para ver nuestro recuerdo.</span>
+    </p>
+  </body>
+</html>
