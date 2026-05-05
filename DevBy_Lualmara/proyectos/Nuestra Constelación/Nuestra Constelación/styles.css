@@ -1,0 +1,350 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  color: white;
+  background-color: black;
+  overflow: hidden;
+}
+
+/* Canvas de fondo: cubre toda la pantalla, detrás de todo */
+#starCanvasBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;       /* queda detrás de todo el contenido */
+  display: block;
+  background: #00000a;
+}
+
+/* ── BOTÓN MÚSICA ── */
+.music-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 50;
+}
+
+.music-btn i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@media (min-width: 600px) {
+  .music-btn {
+    top: 20px;
+    right: 24px;
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+  }
+
+  .music-btn i {
+    font-size: 20px;
+  }
+}
+
+/* ── CONTENEDOR PRINCIPAL ── */
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── ENCABEZADO ── */
+.header {
+  text-align: center;
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 600px) {
+  .header {
+    padding-top: 22px;
+    gap: 8px;
+  }
+}
+
+.title {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+@media (min-width: 600px) {
+  .title {
+    font-size: 2.8rem;
+  }
+}
+
+.subtitle {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.45;
+}
+
+@media (min-width: 600px) {
+  .subtitle {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: normal;
+  }
+}
+
+/* ── CONSTELACIÓN ── */
+.constellation {
+  flex: 1;
+  width: 100%;
+  position: relative;
+}
+
+/* ── CANVAS ── */
+#starCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── ÍCONOS DE ESTRELLAS ── */
+.star-icon {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  cursor: pointer;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.star-icon:hover {
+  transform: translate(-50%, -50%) scale(1.4);
+  filter: drop-shadow(0 0 10px rgba(255, 200, 255, 0.9));
+}
+
+/* ── HINT ── */
+.hint {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+@media (min-width: 600px) {
+  .hint {
+    bottom: 24px;
+    left: 24px;
+    transform: none;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 10px 18px;
+  }
+}
+
+/* ── MODAL ────────────────────────────────────────────────────── */
+
+/* Mobile: centrada en pantalla */
+.star-modal {
+  position: fixed;
+  top: 50%;
+  left: 12px;
+  right: 12px;
+  width: auto;
+  transform: translateY(-50%);
+
+  /* Fondo: negro espacial con tinte azul-morado muy oscuro */
+  background: rgba(6, 4, 20, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  /* Borde con brillo sutil tipo nebulosa */
+  border: 1px solid rgba(160, 120, 255, 0.25);
+  border-radius: 18px;
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+
+  /* Sombra exterior con tinte morado, como si irradiara luz */
+  box-shadow:
+    0 0 0 1px rgba(100, 60, 200, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(120, 80, 220, 0.08);
+
+  /* Animación de entrada */
+  animation: modalIn 0.25s ease-out;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(calc(-50% + 10px)); }
+  to   { opacity: 1; transform: translateY(-50%); }
+}
+
+/* Desktop: esquina inferior derecha */
+@media (min-width: 600px) {
+  .star-modal {
+    top: auto;
+    bottom: 24px;
+    left: auto;
+    right: 24px;
+    width: 290px;
+    transform: none;
+    padding: 20px;
+    gap: 14px;
+    animation: modalInDesktop 0.25s ease-out;
+  }
+
+  @keyframes modalInDesktop {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ── Botón cerrar ── */
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+/* ── Header: icono + título ── */
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 28px;
+}
+
+.modal-star-icon {
+  color: #c084fc;
+  font-size: 1rem;
+  filter: drop-shadow(0 0 4px rgba(192, 132, 252, 0.6));
+}
+
+.modal-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 0.01em;
+}
+
+/* ── Imagen ── */
+.modal-img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 10px;
+
+ 
+  border: 1px solid rgba(160, 120, 255, 0.15);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 600px) {
+  .modal-img {
+    height: 150px;
+  }
+}
+
+/* ── Descripción ── */
+.modal-desc {
+  font-size: 0.8rem;
+  color: rgba(210, 195, 255, 0.75); 
+  line-height: 1.6;
+}
+
+@media (min-width: 600px) {
+  .modal-desc {
+    font-size: 0.875rem;
+  }
+}
+
+/* ── Fecha ── */
+.modal-date {
+  font-size: 0.72rem;
+  color: rgba(160, 130, 220, 0.45);
+  letter-spacing: 0.03em;
+  font-style: italic;
+}
+
+@media (min-width: 600px) {
+  .modal-date {
+    font-size: 0.78rem;
+  }
+}
+
+.star-icon {
+  font-size: 14px; 
+  animation: starPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes starPulse {
+  0%, 100% {
+    text-shadow: 0 0 6px #fff, 0 0 14px #fff, 0 0 28px rgba(200, 220, 255, 0.6);
+    filter: brightness(1);
+  }
+  50% {
+    text-shadow: 0 0 10px #fff, 0 0 24px #fff, 0 0 48px rgba(180, 210, 255, 0.9);
+    filter: brightness(1.4);
+  }
+}
