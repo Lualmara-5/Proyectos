@@ -2,6 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -9,8 +11,19 @@ body {
   font-family: "Segoe UI", sans-serif;
   color: white;
   background-color: black;
-  background: url("assets/images/background_4.webp") center / cover no-repeat fixed;
   overflow: hidden;
+}
+
+/* Canvas de fondo: cubre toda la pantalla, detrás de todo */
+#starCanvasBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;       /* queda detrás de todo el contenido */
+  display: block;
+  background: #00000a;
 }
 
 /* ── BOTÓN MÚSICA ── */
@@ -34,7 +47,6 @@ body {
 }
 
 .music-btn i {
-  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -170,8 +182,8 @@ body {
   }
 }
 
-/* ── MODAL ── */
- 
+/* ── MODAL ────────────────────────────────────────────────────── */
+
 /* Mobile: centrada en pantalla */
 .star-modal {
   position: fixed;
@@ -180,17 +192,37 @@ body {
   right: 12px;
   width: auto;
   transform: translateY(-50%);
-  background: rgba(43, 29, 101, 0.88);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 16px;
+
+  /* Fondo: negro espacial con tinte azul-morado muy oscuro */
+  background: rgba(6, 4, 20, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  /* Borde con brillo sutil tipo nebulosa */
+  border: 1px solid rgba(160, 120, 255, 0.25);
+  border-radius: 18px;
   padding: 16px;
+
   display: flex;
   flex-direction: column;
   gap: 10px;
   z-index: 100;
+
+  /* Sombra exterior con tinte morado, como si irradiara luz */
+  box-shadow:
+    0 0 0 1px rgba(100, 60, 200, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(120, 80, 220, 0.08);
+
+  /* Animación de entrada */
+  animation: modalIn 0.25s ease-out;
 }
- 
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(calc(-50% + 10px)); }
+  to   { opacity: 1; transform: translateY(-50%); }
+}
+
 /* Desktop: esquina inferior derecha */
 @media (min-width: 600px) {
   .star-modal {
@@ -198,49 +230,74 @@ body {
     bottom: 24px;
     left: auto;
     right: 24px;
-    width: 280px;
+    width: 290px;
     transform: none;
     padding: 20px;
-    gap: 12px;
+    gap: 14px;
+    animation: modalInDesktop 0.25s ease-out;
+  }
+
+  @keyframes modalInDesktop {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 }
 
+/* ── Botón cerrar ── */
 .modal-close {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.85rem;
   cursor: pointer;
+  transition: background 0.2s, color 0.2s;
 }
 
 .modal-close:hover {
+  background: rgba(255, 255, 255, 0.12);
   color: white;
 }
 
+/* ── Header: icono + título ── */
 .modal-header {
   display: flex;
   align-items: center;
   gap: 8px;
+  padding-right: 28px;
 }
 
 .modal-star-icon {
-  color: #f472b6;
-  font-size: 1.1rem;
+  color: #c084fc;
+  font-size: 1rem;
+  filter: drop-shadow(0 0 4px rgba(192, 132, 252, 0.6));
 }
 
 .modal-title {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 0.01em;
 }
 
+/* ── Imagen ── */
 .modal-img {
   width: 100%;
   height: 130px;
   object-fit: cover;
   border-radius: 10px;
+
+ 
+  border: 1px solid rgba(160, 120, 255, 0.15);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 @media (min-width: 600px) {
@@ -249,10 +306,11 @@ body {
   }
 }
 
+/* ── Descripción ── */
 .modal-desc {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.5;
+  color: rgba(210, 195, 255, 0.75); 
+  line-height: 1.6;
 }
 
 @media (min-width: 600px) {
@@ -261,18 +319,22 @@ body {
   }
 }
 
+/* ── Fecha ── */
 .modal-date {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.72rem;
+  color: rgba(160, 130, 220, 0.45);
+  letter-spacing: 0.03em;
+  font-style: italic;
 }
 
 @media (min-width: 600px) {
   .modal-date {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
   }
 }
 
 .star-icon {
+  font-size: 14px; 
   animation: starPulse 2.5s ease-in-out infinite;
 }
 
